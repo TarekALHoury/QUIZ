@@ -23,7 +23,7 @@ body {
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repeating */
     overflow: hidden; /* Prevents both vertical and horizontal scrolling */
-    height: 100%; /* Ensures no extra space */
+   
 }
 }
 /* Container Styling */

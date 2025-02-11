@@ -228,7 +228,7 @@ function submitQuiz() {
 
     // Attach the restart button click event
     document.getElementById("restartQuiz").addEventListener("click", () => {
-        window.location.href = 'quiztab.html';
+        window.location.href = './quiztab';
     });
 }
 

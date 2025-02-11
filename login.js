@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
 
     // Check if the user is on the login page
-    if (window.location.pathname.endsWith('LoginPage.html')) {
+    if (window.location.pathname.endsWith('./LoginPage')) {
         console.log("User is on the login page");
         return; // Do nothing if already on the login page
     }
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!localStorage.getItem('loggedIn')) {
         console.log("User is not logged in, redirecting to login page");
         // If not logged in, redirect to the login page
-        window.location.href = 'index.html';
+        window.location.href = './LoginPage';
     } else {
         console.log("User is logged in");
     }

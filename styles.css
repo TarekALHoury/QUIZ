@@ -410,8 +410,6 @@ header {
     width: 100%; /* Adjust the width to fit your design, e.g., 90% of the viewport */
     max-width: 1200%; /* Optional: Set a maximum width to avoid making it too wide */
     overflow: auto; /* Allow scrolling if content overflows */
-    overflow-y: auto; /* Allows vertical scrolling inside the div */
-    overflow-x: hidden; /* Prevents horizontal scrolling */
     
 }
 

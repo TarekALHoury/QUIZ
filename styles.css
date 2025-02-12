@@ -22,8 +22,6 @@ body {
     flex-direction: column;
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repeating */
-    overflow: hidden; /* Prevents both vertical and horizontal scrolling */
-   
 }
 
 /* Container Styling */
@@ -609,7 +607,7 @@ p {
     color: whitesmoke; /* Dark gray for a modern look */
     text-transform: uppercase;
     letter-spacing: 2px; /* Subtle spacing */
-    margin-top: 20px;
+    margin-top: 40px;
     }
 
 
@@ -690,6 +688,7 @@ input[type="radio"] {
     border: 1px solid var(--dark-brown);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevents both vertical and horizontal scrolling */
 }
 
 .result-content {

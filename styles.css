@@ -607,7 +607,8 @@ p {
     color: whitesmoke; /* Dark gray for a modern look */
     text-transform: uppercase;
     letter-spacing: 2px; /* Subtle spacing */
-    margin-top: 40px;
+    margin-top: 50px;
+    margin-bottom: -50px;
     }
 
 

@@ -25,7 +25,7 @@ body {
     overflow: hidden; /* Prevents both vertical and horizontal scrolling */
    
 }
-}
+
 /* Container Styling */
 .container {
     margin: 100px auto;
@@ -407,7 +407,7 @@ header {
     margin: 20px auto;
     padding: 20px;
     height: 500px; /* Stable height */
-    width: 90%; /* Adjust the width to fit your design, e.g., 90% of the viewport */
+    width: 100%; /* Adjust the width to fit your design, e.g., 90% of the viewport */
     max-width: 1200%; /* Optional: Set a maximum width to avoid making it too wide */
     overflow: auto; /* Allow scrolling if content overflows */
     

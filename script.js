@@ -157,7 +157,7 @@ async function startQuiz() {
         displayQuestion();
         document.getElementById("returnButton").classList.remove("hidden");
     } else {
-        alert("Please enter valid numbers for the questions and picture questions.");
+        alert("Please enter valid numbers for the questions and picture questions. Reload the page!");
     }
 }
 
@@ -281,7 +281,6 @@ function timeOut() {
     }).join("");
 
     resultContainer.innerHTML = `
-        <h2>Quiz Results</h2>
         <p style="font-size: 2em; text-align: center;"> ${score}/ ${selectedQuestions.length}</p>
         <p style="color: red;"><strong>Time's Up! You didn't finish in time.</strong></p>
         <p style="color: red;"><strong>انتهى الوقت! لم تتمكن من إكمال الاختبار في الوقت المحدد.</strong></p>

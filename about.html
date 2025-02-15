@@ -11,6 +11,7 @@
     <style>
         /* Styling for the container */
 /* Styling for the container */
+/* Styling for the container */
 .container {
   background-color: #b4b4b4;
   overflow-y: scroll; /* Enable vertical scrolling */
@@ -21,35 +22,41 @@
   
   /* Custom scrollbar styling for Firefox */
   scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #555 #e0e0e0; /* Darker thumb and light track for Firefox */
+  scrollbar-color: #ff6347 #f1f1f1; /* Tomato color for thumb, light gray track for Firefox */
 
   /* Webkit browsers (Chrome, Safari, Opera) */
 }
 
 .container::-webkit-scrollbar {
-  width: 10px; /* Slightly wider scrollbar */
+  width: 12px; /* Wider scrollbar for better visibility */
+  border-radius: 8px; /* Rounded edges for a smooth look */
 }
 
 .container::-webkit-scrollbar-thumb {
-  background-color: #555; /* Darker color for the scrollbar thumb */
-  border-radius: 10px; /* More rounded corners */
-  border: 2px solid #e0e0e0; /* Border to separate thumb from track */
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  background-color: #ff6347; /* Vibrant tomato color for the thumb */
+  border-radius: 8px; /* Rounded thumb */
+  border: 3px solid #f1f1f1; /* Border to separate thumb from track */
+  box-shadow: 0px 4px 10px rgba(255, 99, 71, 0.6); /* Soft shadow for depth */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-  background-color: #333; /* Darker thumb color on hover */
+  background-color: #ff4500; /* Darker red on hover */
+  transform: scale(1.1); /* Slightly enlarge the thumb on hover */
 }
 
 .container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Lighter track color */
-  border-radius: 10px; /* Rounded corners for track */
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Shadow for track */
+  background-color: #f1f1f1; /* Light gray background for track */
+  border-radius: 8px; /* Rounded corners for track */
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1); /* Inner shadow to give depth */
 }
 
 .container::-webkit-scrollbar-track-piece {
-  border-radius: 10px; /* Ensures track has rounded corners on all sides */
+  border-radius: 8px; /* Ensures track has rounded corners */
+}
+
+.container::-webkit-scrollbar-corner {
+  background-color: transparent; /* No corner style for cleaner design */
 }
 
 

@@ -9,21 +9,45 @@
 </head>
 <body>
     <style>
-        .container{
-             background-color: #b4b4b4;
-               overflow-y: scroll; /* Enable vertical scrolling */
+        /* Styling for the container */
+.container {
+  background-color: #b4b4b4;
+  overflow-y: scroll; /* Enable vertical scrolling */
   max-height: 100vh; /* Limit the height to viewport */
   padding: 16px;
   box-sizing: border-box;
+  position: relative; /* To make sure the container scrolls */
+  
+  /* Custom scrollbar styling */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #888 #e0e0e0; /* Firefox: thumb color and track color */
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  /* Webkit browsers (Chrome, Safari, Opera) */
+}
+.container::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
 
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 4px; /* Round the corners of the scrollbar thumb */
+}
+
+.container::-webkit-scrollbar-track {
+  background-color: #e0e0e0; /* Color of the scrollbar track */
+  border-radius: 4px; /* Round the corners of the track */
+}
+
+/* Prevent the page from scrolling */
+body {
+  overflow: hidden; /* Disable scrolling on the body */
+  height: 100%; /* Ensure full height */
+}
+
+html {
+  height: 100%; /* Ensure full height */
+}
+
         }
         .dot-list {
             list-style-type: none;

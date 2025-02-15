@@ -11,10 +11,19 @@
     <style>
         .container{
              background-color: #b4b4b4;;
-              overflow-y: auto; /* Adds vertical scrolling */
-              max-height: 100vh; /* Ensures it doesn't exceed the viewport height */
-              padding: 16px; /* Adds padding inside the container */
-              box-sizing: border-box; /* Ensures padding doesn't affect the width*/
+               overflow-y: scroll; /* Enable vertical scrolling */
+  max-height: 100vh; /* Limit the height to viewport */
+  padding: 16px;
+  box-sizing: border-box;
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
         }
         .dot-list {
             list-style-type: none;

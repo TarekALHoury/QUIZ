@@ -22,6 +22,8 @@ body {
     flex-direction: column;
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repeating */
+    overflow: hidden;
+    height: 100%;
 }
 
 /* Container Styling */

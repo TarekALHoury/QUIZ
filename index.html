@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quiz For Your Driving License Computer Exam In LEBANON - 2025</title>
     <meta name="description" content="Train for your exam with our secure and user-friendly quiz platform! Practice with a real 15-minute timer, and choose up to 200 randomized questions in English, Arabic, or French. Experience authentic exam conditions with simplified, well-structured questions designed to help you succeed. Get ready to pass with confidence!">
     <meta name="keywords" content="driving license quiz Lebanon, computer exam practice, driving test questions, Lebanon driving exam, quiz in Arabic, French, English driving quiz">
@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+input {
+  font-size: 16px;
+}
+
         .help-bubble {
             display: inline-block;
             padding: 10px 20px;
@@ -85,7 +89,7 @@
         <form id="loginForm">
             <label for="loginCode" id="enterCodeLabel"></label>
             <div class="help-container">
-                <input type="text" id="loginCode" required placeholder="Enter the Access code">
+                <input type="text" id="loginCode" required placeholder="Enter the Access code" inputmode="numeric">
             </div>
             <button type="submit" id="loginSubmitButton">Submit</button>
             <p id="loginMessage"></p> <!-- Error or Success message will appear here -->

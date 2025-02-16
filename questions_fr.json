@@ -697,11 +697,11 @@
         {
                 "question": " Quelle est la vitesse optimale pour l'éco-conduite? ",
                 "options": [
-                    " 80 km/h - 100 km/h",
-                    " 50 km/h - 80 km/h",
-                    " 40 km/h - 50 km/h"
+                    "80 km/h - 100 km/h",
+                    "50 km/h - 80 km/h",
+                    "40 km/h - 50 km/h"
                 ],
-                "answer": "50 km/h – 80km/h"
+                "answer": "50 km/h - 80 km/h"
         },
         {
                 "question": " Quel est le nombre maximal de tours par minute du moteur que vous ne devez pas dépasser en conduisant?",

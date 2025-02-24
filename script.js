@@ -170,7 +170,7 @@ function displayQuestion() {
         <h2 id="ok2"><u>Question ${currentQuestionIndex + 1}</u></h2>
         ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
         <h3>${question.question}</h3>
-    <ul class="clickable-list">
+    
     ${question.options.map((option, index) => `
         <li class="clickable-item">
             <label>
@@ -179,7 +179,7 @@ function displayQuestion() {
             </label>
         </li>
     `).join('')}
-</ul>
+
 
     `;
 

@@ -140,7 +140,7 @@
     {
     "question": "What does this sign mean?",
     "image": "images/39.png",
-    "options": ["No entry ", "End of priority ", "Caution, vehicles coming from the opposite direction have the right of way"],
+    "options": ["No entry ","End of priority","Caution, vehicles coming from the opposite direction have the right of way"],
     "answer": "End of priority"
     },
     {

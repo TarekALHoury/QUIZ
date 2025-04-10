@@ -1,12 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("DOM fully loaded and parsed");
 
-    // Check if the user is on the login page
-    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
-        console.log("User is on the login page");
-        return; // Do nothing on the login page
-    }
-
 // Login functionality
 function handleLogin(event) {
     event.preventDefault(); // Prevent form from refreshing the page

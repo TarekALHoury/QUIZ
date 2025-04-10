@@ -10,16 +10,6 @@ let timerInterval;
 let timeLeft = 900; // Set timer to 10 seconds for testing
 let selectedLanguage = 'en'; // Default language
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if the user is logged in
-    if (!localStorage.getItem('loggedIn')) {
-        console.log("User is not logged in, redirecting to login page");
-        window.location.href = './index'; // Redirect to login
-    } else {
-        console.log("User is logged in, loading quiz page");
-    }
-});
-
 // Add animations to buttons
 document.querySelectorAll('button').forEach(button => {
     button.addEventListener('mouseover', () => {

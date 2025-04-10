@@ -21,7 +21,7 @@
      } else {
          console.log("User is logged in");
      }
- });
+ };
  
  // Login functionality
  async function handleLogin(event) {

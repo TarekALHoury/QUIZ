@@ -7,15 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return; // Do nothing on the login page
     }
 
-    // Redirect users if they are not authenticated
-    if (!sessionStorage.getItem("loggedIn")) {
-        console.log("User is not logged in, redirecting to login page");
-        window.location.href = "index.html";
-    } else {
-        console.log("User is logged in");
-    }
-});
-
 // Login functionality
 function handleLogin(event) {
     event.preventDefault(); // Prevent form from refreshing the page

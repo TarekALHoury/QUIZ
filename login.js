@@ -30,6 +30,7 @@ function handleLogin(event) {
 
         // Use sessionStorage instead of localStorage for security
         sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("lastActivity", Date.now()); // ⬅️ ADD THIS LINE
 
         // Redirect to the quiz page (quiztab.html)
         window.location.href = "quiztab.html"; 

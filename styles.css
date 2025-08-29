@@ -829,5 +829,32 @@ input[type="radio"] {
   color: #111827;
 
 
+/* Buttons row under options */
+#quizContainer .button-container{
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Ensure they render even if some global rule hides buttons */
+#nextQuestion, #prevQuestion, #submitQuiz{
+  display: inline-block !important;
+  min-width: 120px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* Nice colors */
+#submitQuiz{ background:#2563eb; color:#fff; border:0; }
+#nextQuestion{ background:#22c55e; color:#fff; border:0; }
+#prevQuestion{ background:#6b7280; color:#fff; border:0; }
+
+#submitQuiz:hover{ box-shadow:0 10px 20px rgba(37,99,235,.25); transform: translateY(-1px); }
+#nextQuestion:hover{ box-shadow:0 10px 20px rgba(34,197,94,.25); transform: translateY(-1px); }
+#prevQuestion:hover{ box-shadow:0 10px 20px rgba(0,0,0,.18); transform: translateY(-1px); }
+
 
 

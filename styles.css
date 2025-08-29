@@ -828,6 +828,37 @@ input[type="radio"] {
 #quizContainer * {
   color: #111827;
 }
+/* Same width */
+#quizContainer .option,
+#quizContainer .clickable-item {
+  width: min(520px, 92%);
+  margin: 10px auto;
+  border-radius: 12px;
+}
+
+/* Same height + center content */
+#quizContainer .option,
+#quizContainer .clickable-item label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;                 /* <-- unify height */
+  padding: 10px 14px;
+}
+
+/* 2-line clamp with ellipsis for long text */
+#quizContainer .option,
+#quizContainer .clickable-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* max 2 lines */
+  -webkit-box-orient: vertical;
+  line-height: 1.3;
+  text-align: center;
+  white-space: normal;
+}
+
 
 
 

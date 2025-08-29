@@ -84,7 +84,7 @@ p {
 
     </style>
     <div class="taskbar">
-        <a href="quiztab.html">Home</a>
+        <a href="quiztab">Home</a>
     </div>
     <div class="container">
         <h1>About</h1>
@@ -152,4 +152,5 @@ p {
     </div>
 </body>
 </html>
+
 

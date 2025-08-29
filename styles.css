@@ -804,9 +804,6 @@ input[type="radio"] {
         padding: 12px;
     }
 }
-/* ===========================
-   Quiz Section Background
-   =========================== */
 #quizContainer {
   position: relative;
   background: url('assets/road-bg.jpg') center/cover no-repeat;
@@ -817,22 +814,20 @@ input[type="radio"] {
   overflow: hidden; /* clip overlay inside */
 }
 
-/* dark overlay on top of background */
-#quizContainer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(11,16,32,0.75);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  z-index: 0;
+#quizContainer {
+  position: relative;
+  background: #ffffff;       /* white background */
   border-radius: 18px;
+  padding: 24px;
+  color: #111827;            /* black/near-black text */
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  overflow: hidden;
 }
 
-/* make sure quiz content sits above overlay */
-#quizContainer > * {
-  position: relative;
-  z-index: 1;
+/* ensure children text/buttons inherit proper color */
+#quizContainer * {
+  color: #111827;
 }
+
 
 

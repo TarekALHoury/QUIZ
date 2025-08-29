@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- @copyrights
+ALL RIGHTS ARE RESERVED : TAREK HOURY -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Page Title & Description -->
+  <title>Lebanon Driving Quiz — Free Practice for Your Driving License Exam 2025</title>
+  <meta name="description" content="2025 - Train for your Lebanese driving exam with our secure and user-friendly quiz platform! Practice with a real 15-minute timer, and choose up to 200 randomized questions in English, Arabic, or French. Experience authentic exam conditions with simplified, well-structured questions designed to help you succeed." />
+  <meta name="keywords" content="driving license quiz Lebanon, computer exam practice, driving test questions, Lebanon driving exam, quiz in Arabic, French, English driving quiz" />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Lebanon Driving Quiz — Free Practice for Your Driving License Exam 2025" />
+  <meta property="og:description" content="Train with our Lebanese driving test simulator: 15-minute timer, up to 200 randomized questions, in English, Arabic, or French. Pass your exam with confidence!" />
+  <meta property="og:image" content="android-chrome-192x192.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lebanondrivingquiz.com/" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lebanon Driving Quiz",
+    "url": "https://lebanondrivingquiz.com/",
+    "logo": "https://lebanondrivingquiz.com/android-chrome-192x192-removebg-preview.png"
+  }
+  </script>
+
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root{ --bg:#0b1020; --panel:#0f172a; --muted:#94a3b8; --text:#e2e8f0; --accent:#22c55e; --accent-2:#3b82f6; --ring:0 0 0 3px rgba(59,130,246,.35) }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;background:linear-gradient(180deg,#0b1020 0%,#111827 100%);color:var(--text);display:flex;flex-direction:column}
+    a{color:var(--accent-2);text-decoration:none}
+    .container{width:min(1100px,92%);margin-inline:auto}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:40;background:rgba(11,16,32,.7);backdrop-filter:blur(8px);border-bottom:1px solid rgba(148,163,184,.15)}
+    .nav{display:flex;align-items:center;gap:16px;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),#16a34a)}
+    .btn{appearance:none;border:1px solid rgba(148,163,184,.25);background:rgba(255,255,255,.08);color:var(--text);padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;transition:transform .15s ease, box-shadow .2s ease, background .2s ease}
+    .btn:hover{background:rgba(255,255,255,.15);transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.28)}
+    .btn:active{transform:translateY(0);box-shadow:0 6px 16px rgba(0,0,0,.22)}
+    .btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(59,130,246,.35)}
+    .btn.primary{background:linear-gradient(135deg,#3b82f6,#2563eb);border:none;color:#fff}
+    .btn.ghost{background:transparent}
+    .btn:hover{background:rgba(255,255,255,.15);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.35)}
+    .btn:active{transform:scale(.97)}
+    .btn.primary{background:linear-gradient(135deg,#3b82f6,#2563eb);border:none;color:#fff}
+    .btn.ghost{background:transparent}
+
+    /* Hero */
+    .hero{padding:56px 0 24px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px}
+    .card{background:rgba(15,23,42,.8);border:1px solid rgba(148,163,184,.15);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .hero .card{padding:28px}
+    .kicker{color:var(--accent-2);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
+    h1{margin:.35em 0 .2em;font-size:clamp(2rem,5vw,3rem);line-height:1.05}
+    .sub{color:var(--muted);font-size:1.05rem}
+
+    /* Feature details */
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+    .fdetail{display:flex;align-items:center;gap:12px;padding:16px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.25);box-shadow:inset 0 -1px 0 rgba(255,255,255,.08);transition:transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;}
+    .fdetail:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.45);box-shadow:0 10px 24px rgba(0,0,0,.25), inset 0 -1px 0 rgba(255,255,255,.12)}
+    .fdetail:active{transform:scale(.99)}
+    .fdetail svg{width:22px;height:22px;flex-shrink:0;color:var(--accent-2)}
+    .fdetail span{font-weight:600;color:var(--text)}
+    .fdetail:hover{background:rgba(255,255,255,.12);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+    .fdetail:active{transform:scale(.98)}
+
+    /* Sections */
+    section{padding:26px 0}
+    h2{font-size:1.6rem;margin:0 0 14px}
+
+    /* Info + About */
+    .list{margin:10px 0 0;padding-left:20px;color:var(--muted)}
+    .list li{margin:.35rem 0}
+
+    /* Footer (fixed) */
+    footer{margin-top:auto;position:sticky;bottom:0;background:rgba(11,16,32,.9);backdrop-filter:blur(8px);border-top:1px solid rgba(148,163,184,.15)}
+    .foot{display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 0;flex-wrap:wrap}
+    .tiny{font-size:.85rem;color:var(--muted)}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:100;padding:18px}
+    .modal.show{display:flex}
+    .modal .window{width:min(780px,96%);background:#fff;color:#111;border-radius:16px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+    .modal h2{margin-top:0}
+    .modal .bar{position:relative;display:block;padding:0;border:none}
+    .modal .title{display:block;font-weight:800;font-size:1.25rem;padding:18px 20px;margin:0}
+    .modal .close{appearance:none;border:none;background:transparent;font-size:1.4rem;line-height:1;cursor:pointer;color:#64748b;padding:6px 8px;border-radius:8px;position:absolute;top:10px;right:12px}
+    .modal .close:hover{background:#f1f5f9}
+    .modal .close:hover{background:#f3f4f6}
+    .modal .body{padding:0 20px 18px;line-height:1.6}
+    .modal .body ul{list-style:disc;padding-left:20px}
+    .modal .body li{margin:.45rem 0}
+    .modal ul{margin:10px 0 0;padding-left:20px}
+    .modal ul li{margin:.4rem 0}
+    .modal .note{background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;border-radius:12px;padding:12px 14px;margin-top:16px}
+
+    /* Responsive */
+    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+   <div class="container nav">
+      <div class="brand" aria-label="Site brand">
+        <img class="logo" src="android-chrome-192x192-removebg-preview.png"/>
+        <span id="brand">Lebanon Driving Quiz</span>
+      <div class="nav-right">
+        <button class="btn ghost" id="aboutBtn">About</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero (Intro only) -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="card">
+        <div class="kicker">Official-style Practice</div>
+        <h1>Your Driving Quiz Companion</h1>
+        <p class="sub">Practice with exam-style questions and build confidence for the real test.</p>
+        <div class="features">
+          <div class="fdetail">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V7l-8-3-8 3v5c0 6 8 10 8 10z"/></svg>
+            <span>Secure Access</span>
+          </div>
+          <div class="fdetail">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span>Timed Practice</span>
+          </div>
+          <div class="fdetail">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="6" width="3" height="12"/></svg>
+            <span>Track Progress</span>
+          </div>
+          <div class="fdetail">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span>Multi-Language</span>
+          </div>
+        </div>
+        <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" id="startBtn">Start Practice</button>
+          <button class="btn ghost" id="learnMoreBtn">Learn more</button>
+        </div>
+      </div>
+      <div class="card" style="padding:24px">
+        <h2 style="margin-top:0">How it works</h2>
+        <ol class="list" style="padding-left:18px">
+          <li>Click <strong>Start Practice</strong> to launch the quiz.</li>
+          <li>Choose your <strong>question count</strong> (e.g., 20/30/50/100/200).</li>
+          <li>Confirm the <strong>15-minute timer</strong> and hit <strong>Start</strong>.</li>
+          <li>Answer questions; you can <strong>skip</strong>, <strong>go back</strong>, and <strong>change answers</strong> anytime.</li>
+          <li>When finished, see your <strong>score summary</strong> and review correct answers.</li>
+          <li>Retake immediately to improve, or increase the question count for a tougher session.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="card" style="padding:22px">
+        <h2>About This Project</h2>
+        <ul class="list">
+          <li><strong>Purpose:</strong> Provide a realistic, stress-free way to practice the Lebanese driving theory exam.</li>
+          <li><strong>Question Source:</strong> Based on officially distributed PDFs; wording is kept consistent for familiarity.</li>
+          <li><strong>Timer & Flow:</strong> 15-minute sessions to mirror exam pressure, with optional higher question counts for training.</li>
+          <li><strong>Randomization:</strong> Questions are shuffled every attempt to reduce memorization.</li>
+          <li><strong>Device Friendly:</strong> Fully responsive for phones, tablets, and desktops with a clean, accessible UI.</li>
+          <li><strong>Review Mode:</strong> End-of-session summary to check mistakes and learn quickly.</li>
+          <li><strong>Privacy:</strong> No unnecessary data collection; practice results stay on your device/session.</li>
+          <li><strong>Disclaimer:</strong> Training tool only — not affiliated with any government agency.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (fixed) -->
+   <footer>
+    <div class="container foot">
+      <span class="tiny">© <span id="year"></span> Lebanon Driving Quiz — All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Learn More Modal -->
+  <div class="modal" id="learnModal">
+    <div class="window">
+      <div class="bar">
+        <div class="title">Learn More</div>
+        <button class="close" id="closeLearn">×</button>
+      </div>
+      <div class="body">
+        <p>Our Driving Test Quiz Application is a user friendly platform designed to help you confidently prepare for your driving test. With an easy to navigate website and straightforward content, it's perfect for all users.</p>
+        <h3>Key Features:</h3>
+        <ul>
+          <li><strong>Authentic Exam Timer:</strong> A fixed 15 minute timer, just like the real exam, helps users practice under real test conditions.</li>
+          <li><strong>Multilingual Support:</strong> Users can choose up to 200 questions in three different languages English, Arabic, and French.</li>
+          <li><strong>User-Friendly Design:</strong> The website is easy to navigate, with a clean layout available in three languages.</li>
+          <li><strong>Randomized Question Order:</strong> Prevents memorization by shuffling questions each time a quiz is taken.</li>
+          <li><strong>Exam Simulation Mode:</strong> A full length test that mimics real exam conditions. In the actual exam, you get 30 questions and need 24/30 to pass, but in our quiz, you can choose how many questions you want, and there's no failing it's purely for training to help you succeed.</li>
+          <li><strong>Leaderboard & Scores:</strong> Compete with others and track high scores for motivation.</li>
+          <li><strong>Simplified Questions:</strong> Easy to read and well structured questions to ensure effective preparation.</li>
+          <li><strong>Success-Oriented Approach:</strong> Designed to boost knowledge and help users succeed in their exams.</li>
+        </ul>
+        <div class="note"><strong>Important Note:</strong> If you notice any spelling or grammatical errors, please be aware that these come from the original PDF document. We directly copy paste the questions without making any changes to ensure accuracy with the source material.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Modal -->
+  <div class="modal" id="aboutModal">
+    <div class="window">
+      <div class="bar">
+        <div class="title">About</div>
+        <button class="close" id="closeAbout">×</button>
+      </div>
+      <div class="body">
+        <p>[Add your info here later]</p>
+      </div>
+    </div>
+  </div>
+
+ <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const learnModal=document.getElementById('learnModal');
+    document.getElementById('learnMoreBtn').onclick=()=>learnModal.classList.add('show');
+    document.getElementById('closeLearn').onclick=()=>learnModal.classList.remove('show');
+    window.addEventListener('click',e=>{if(e.target===learnModal)learnModal.classList.remove('show')});
+    const aboutModal=document.getElementById('aboutModal');
+    document.getElementById('aboutBtn').onclick=()=>aboutModal.classList.add('show');
+    document.getElementById('closeAbout').onclick=()=>aboutModal.classList.remove('show');
+    window.addEventListener('click',e=>{if(e.target===aboutModal)aboutModal.classList.remove('show')});
+document.getElementById('startBtn').onclick = () => {
+  window.location.href = "quiztab.html";
+};
+
+  </script>
+</body>
+</html>

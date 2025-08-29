@@ -804,4 +804,35 @@ input[type="radio"] {
         padding: 12px;
     }
 }
+/* ===========================
+   Quiz Section Background
+   =========================== */
+#quizContainer {
+  position: relative;
+  background: url('assets/road-bg.jpg') center/cover no-repeat;
+  border-radius: 18px;
+  padding: 20px;
+  color: #fff; /* text readable */
+  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+  overflow: hidden; /* clip overlay inside */
+}
+
+/* dark overlay on top of background */
+#quizContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(11,16,32,0.75);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 0;
+  border-radius: 18px;
+}
+
+/* make sure quiz content sits above overlay */
+#quizContainer > * {
+  position: relative;
+  z-index: 1;
+}
+
 

@@ -10,7 +10,7 @@
 /* Overall body styles */
 body {
     font-family: 'Tajawal', sans-serif;
-    background: url('wp2057932.jpg') no-repeat center center fixed;
+    background: url('BG.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #fff;
     line-height: 1.6;
@@ -804,3 +804,4 @@ input[type="radio"] {
         padding: 12px;
     }
 }
+

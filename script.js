@@ -117,66 +117,67 @@ document.getElementById('language').addEventListener('change', function () {
     document.getElementById('startQuiz').classList.remove('hidden');
 });
 
-// Wait for both sets of questions to be loaded before starting the quiz
+// --- startQuiz (fixed: sets initial button state) ---
 async function startQuiz() {
-    console.log("Start Quiz triggered...");
-    
-    const questionCount = parseInt(document.getElementById('questionCount').value);
-    const pictureQuestionCount = parseInt(document.getElementById('pictureQuestionCount').value);
+  console.log("Start Quiz triggered...");
 
-    if (questionCount >= 1 && questionCount <= 100 && pictureQuestionCount >= 1 && pictureQuestionCount <= 100) {
-        // Hide the start button and show the quiz container
-        document.getElementById('startQuiz').classList.add('hidden');
-        document.getElementById('timer').classList.remove('hidden');
-        startTimer(); // Start the timer when quiz begins
+  const questionCount = parseInt(document.getElementById('questionCount').value);
+  const pictureQuestionCount = parseInt(document.getElementById('pictureQuestionCount').value);
 
-        // Ensure both sets of questions are loaded
-        await Promise.all([loadQuestions(selectedLanguage), loadPictureQuestions(selectedLanguage)]);
+  if (questionCount >= 1 && questionCount <= 100 && pictureQuestionCount >= 1 && pictureQuestionCount <= 100) {
+    document.getElementById('startQuiz').classList.add('hidden');
+    document.getElementById('timer').classList.remove('hidden');
+    startTimer();
 
-        // Select random questions
-        selectedQuestions = questions.sort(() => Math.random() - 0.5).slice(0, questionCount);
-        selectedPictureQuestions = pictureQuestions.sort(() => Math.random() - 0.5).slice(0, pictureQuestionCount);
+    await Promise.all([loadQuestions(selectedLanguage), loadPictureQuestions(selectedLanguage)]);
 
-        // Combine and shuffle all questions
-        const allQuestions = [...selectedQuestions, ...selectedPictureQuestions];
-        selectedQuestions = allQuestions.sort(() => Math.random() - 0.5);
+    selectedQuestions = questions.sort(() => Math.random() - 0.5).slice(0, questionCount);
+    selectedPictureQuestions = pictureQuestions.sort(() => Math.random() - 0.5).slice(0, pictureQuestionCount);
 
-        currentQuestionIndex = 0;
-        document.getElementById("quizContainer").classList.remove("hidden");
-        document.querySelector(".config").classList.add("hidden");
-        displayQuestion();
-        document.getElementById("returnButton").classList.remove("hidden");
-    } else {
-        alert("Please enter valid numbers for the questions and picture questions. Reload the page!");
-    }
+    const allQuestions = [...selectedQuestions, ...selectedPictureQuestions];
+    selectedQuestions = allQuestions.sort(() => Math.random() - 0.5);
+
+    currentQuestionIndex = 0;
+    document.getElementById("quizContainer").classList.remove("hidden");
+    document.querySelector(".config").classList.add("hidden");
+
+    displayQuestion(); // show first question
+
+    // set initial button states (first question)
+    document.getElementById("prevQuestion").classList.add("hidden");
+    document.getElementById("nextQuestion").classList.remove("hidden");
+    document.getElementById("submitQuiz").classList.add("hidden");
+
+    document.getElementById("returnButton").classList.remove("hidden");
+  } else {
+    alert("Please enter valid numbers for the questions and picture questions. Reload the page!");
+  }
 }
 
-// Display the current question
+
+// --- displayQuestion (keep as-is, includes button toggles) ---
 function displayQuestion() {
-    const quizElement = document.getElementById("quiz");
-    const question = selectedQuestions[currentQuestionIndex];
+  const quizElement = document.getElementById("quiz");
+  const question = selectedQuestions[currentQuestionIndex];
 
-    quizElement.innerHTML = `
-        <h2 id="ok2"><u>Question ${currentQuestionIndex + 1}</u></h2>
-        ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
-        <h3>${question.question}</h3>
-    
-    ${question.options.map((option, index) => `
-        <li class="clickable-item">
-            <label>
-                <input type="radio" name="answer" value="${option}" ${selectedAnswers[currentQuestionIndex] === option ? 'checked' : ''}>
-                <span>${option}</span> <!-- Wrap the option text in a span -->
-            </label>
-        </li>
+  quizElement.innerHTML = `
+    <h2 id="ok2"><u>Question ${currentQuestionIndex + 1}</u></h2>
+    ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
+    <h3>${question.question}</h3>
+    ${question.options.map((option) => `
+      <li class="clickable-item">
+        <label>
+          <input type="radio" name="answer" value="${option}" ${selectedAnswers[currentQuestionIndex] === option ? 'checked' : ''}>
+          <span>${option}</span>
+        </label>
+      </li>
     `).join('')}
+  `;
 
-
-    `;
-
-    // Show/hide navigation buttons
-    document.getElementById("prevQuestion").classList.toggle("hidden", currentQuestionIndex === 0);
-    document.getElementById("nextQuestion").classList.toggle("hidden", currentQuestionIndex === selectedQuestions.length - 1);
-    document.getElementById("submitQuiz").classList.toggle("hidden", currentQuestionIndex !== selectedQuestions.length - 1);
+  // Show/hide navigation buttons based on position
+  document.getElementById("prevQuestion").classList.toggle("hidden", currentQuestionIndex === 0);
+  document.getElementById("nextQuestion").classList.toggle("hidden", currentQuestionIndex === selectedQuestions.length - 1);
+  document.getElementById("submitQuiz").classList.toggle("hidden", currentQuestionIndex !== selectedQuestions.length - 1);
 }
 
 // Navigation through questions
@@ -332,3 +333,4 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
+

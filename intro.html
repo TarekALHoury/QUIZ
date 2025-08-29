@@ -171,6 +171,19 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
     .modal ul{margin:10px 0 0;padding-left:20px}
     .modal ul li{margin:.4rem 0}
     .modal .note{background:#f8fafc;border:1px solid #e2e8f0;color:#0f172a;border-radius:12px;padding:12px 14px;margin-top:16px}
+/* Make About content readable on white modal background */
+.modal .about-section h3,
+.modal .about-section h4 { color: #0f172a; }
+
+.modal .about-section p,
+.modal .about-section ul { color: #111827; }
+
+.modal .about-section .note {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  color: #0f172a;
+}
+
 
     /* Responsive */
     @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
@@ -184,9 +197,11 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
     <img class="logo" src="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO.png" alt="Logo"/>
     <span id="brand">Lebanon Driving Quiz</span>
   </div>
-  <div class="nav-right">
-    <button class="btn ghost" id="aboutBtn">About</button>
-  </div>
+<div class="nav-right">
+  <button class="btn ghost" id="aboutBtn">About</button>
+  <button class="btn ghost" id="contactBtn">Contact</button>
+</div>
+
 </div>
   </header>
 
@@ -286,53 +301,109 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
   </div>
 
   <!-- About Modal -->
- <div class="about-section">
-  <h3>About Lebanon Driving Quiz</h3>
-  <p>
-    This website was created to help students prepare for the Lebanese driving theory exam.  
-    It is a free, unofficial practice tool designed to make studying easier with:
-  </p>
-  <ul>
-    <li>Randomized exam-style questions</li>
-    <li>15-minute timer like the real test</li>
-    <li>Mobile-friendly interface</li>
-  </ul>
-  <p class="note">
-    ⚠️ This is not an official government website. It’s a community project built by students to help other students.
-  </p>
-
-  <h4>Created by:</h4>
-  <div class="creators">
-    <a href="https://www.instagram.com/tarek_houry?igsh=ZjczZDlzamlhank5" target="_blank" class="insta-btn">
-      <span>📸</span> Tarek Houry
-    </a>
-    <a href="https://www.instagram.com/michel.kachouh_?igsh=em43eDE1MGcwcnVo" target="_blank" class="insta-btn">
-      <span>📸</span> Michel Kahchouh
-    </a>
+<div class="modal" id="contactModal">
+  <div class="window">
+    <div class="bar">
+      <div class="title">Contact Us</div>
+      <button class="close" id="closeContact">×</button>
+    </div>
+    <div class="body">
+      <p><strong>If you notice any issues or would like to provide feedback</strong>,  
+      please feel free to contact us via email at  
+      <a href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a>.  
+      We're always open to hearing your thoughts and improving the experience for everyone. Thank you!</p>
+    </div>
   </div>
+</div>
 
-  <h4>Contact & Feedback:</h4>
-  <p>
-    If you notice any issues or would like to share feedback, please email us at  
-    <a href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a>.  
-    We’re always happy to improve the experience. Thank you!
-  </p>
+ <!-- About Modal -->
+<div class="modal" id="aboutModal">
+  <div class="window">
+    <div class="bar">
+      <div class="title">About</div>
+      <button class="close" id="closeAbout">×</button>
+    </div>
+    <div class="body">
+      <div class="about-section">
+        <h3>About Lebanon Driving Quiz</h3>
+        <p>
+          This website was created to help students prepare for the Lebanese driving theory exam.
+          It is a free, unofficial practice tool designed to make studying easier with:
+        </p>
+        <ul>
+          <li>Randomized exam-style questions</li>
+          <li>15-minute timer like the real test</li>
+          <li>Mobile-friendly interface</li>
+        </ul>
+        <p class="note">
+          ⚠️ This is not an official government website. It’s a community project built by students to help other students.
+        </p>
+
+        <h4>Created by:</h4>
+        <div class="creators">
+          <a href="https://www.instagram.com/tarek_houry?igsh=ZjczZDlzamlhank5" target="_blank" class="insta-btn">
+            <span>📸</span> Tarek Houry
+          </a>
+          <a href="https://www.instagram.com/michel.kachouh_?igsh=em43eDE1MGcwcnVo" target="_blank" class="insta-btn">
+            <span>📸</span> Michel Kahchouh
+          </a>
+        </div>
+
+        <h4>Contact & Feedback:</h4>
+        <p>
+          If you notice any issues or would like to share feedback, please email us at
+          <a href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a>.
+          We’re always happy to improve the experience. Thank you!
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
 
  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const learnModal=document.getElementById('learnModal');
-    document.getElementById('learnMoreBtn').onclick=()=>learnModal.classList.add('show');
-    document.getElementById('closeLearn').onclick=()=>learnModal.classList.remove('show');
-    window.addEventListener('click',e=>{if(e.target===learnModal)learnModal.classList.remove('show')});
-    const aboutModal=document.getElementById('aboutModal');
-    document.getElementById('aboutBtn').onclick=()=>aboutModal.classList.add('show');
-    document.getElementById('closeAbout').onclick=()=>aboutModal.classList.remove('show');
-    window.addEventListener('click',e=>{if(e.target===aboutModal)aboutModal.classList.remove('show')});
-document.getElementById('startBtn').onclick = () => {
-  window.location.href = "/quiztab";
-};
+   <script>
+  // Year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Learn More modal
+  const learnModal = document.getElementById('learnModal');
+  const learnMoreBtn = document.getElementById('learnMoreBtn');
+  const closeLearn = document.getElementById('closeLearn');
+
+  learnMoreBtn && (learnMoreBtn.onclick = () => learnModal.classList.add('show'));
+  closeLearn && (closeLearn.onclick = () => learnModal.classList.remove('show'));
+  window.addEventListener('click', (e) => {
+    if (e.target === learnModal) learnModal.classList.remove('show');
+  });
+
+  // About modal
+  const aboutModal = document.getElementById('aboutModal');
+  const aboutBtn = document.getElementById('aboutBtn');
+  const closeAbout = document.getElementById('closeAbout');
+
+  aboutBtn && (aboutBtn.onclick = () => aboutModal.classList.add('show'));
+  closeAbout && (closeAbout.onclick = () => aboutModal.classList.remove('show'));
+  window.addEventListener('click', (e) => {
+    if (e.target === aboutModal) aboutModal.classList.remove('show');
+  });
+
+  // Contact modal
+  const contactModal = document.getElementById('contactModal');
+  const contactBtn = document.getElementById('contactBtn');
+  const closeContact = document.getElementById('closeContact');
+
+  contactBtn && (contactBtn.onclick = () => contactModal.classList.add('show'));
+  closeContact && (closeContact.onclick = () => contactModal.classList.remove('show'));
+  window.addEventListener('click', (e) => {
+    if (e.target === contactModal) contactModal.classList.remove('show');
+  });
+
+  // Start button (extensionless path)
+  document.getElementById('startBtn').onclick = () => {
+    window.location.href = "/quiztab";
+  };
+</script>
 
   </script>
 </body>

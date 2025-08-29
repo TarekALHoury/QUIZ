@@ -876,4 +876,11 @@ input[type="radio"] {
 }
 
 
+/* Make sure hidden REALLY hides the nav buttons */
+#prevQuestion.hidden,
+#nextQuestion.hidden,
+#submitQuiz.hidden {
+  display: none !important;
+}
+
 

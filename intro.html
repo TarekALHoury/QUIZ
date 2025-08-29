@@ -187,6 +187,31 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
 
     /* Responsive */
     @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
+
+/* Better Instagram icon using CSS mask + gradient */
+.ig-icon{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  border-radius: 4px;
+  /* Instagram-like gradient */
+  background: linear-gradient(45deg,#f58529,#f77737,#dd2a7b,#8134af,#515bd4);
+  /* Use the glyph as a mask so the gradient shows through */
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M7 2C3.686 2 1 4.686 1 8v8c0 3.314 2.686 6 6 6h10c3.314 0 6-2.686 6-6V8c0-3.314-2.686-6-6-6H7zm10 2c2.206 0 4 1.794 4 4v8c0 2.206-1.794 4-4 4H7c-2.206 0-4-1.794-4-4V8c0-2.206 1.794-4 4-4h10zm.5 2a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>') center/contain no-repeat;
+          mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000" d="M7 2C3.686 2 1 4.686 1 8v8c0 3.314 2.686 6 6 6h10c3.314 0 6-2.686 6-6V8c0-3.314-2.686-6-6-6H7zm10 2c2.206 0 4 1.794 4 4v8c0 2.206-1.794 4-4 4H7c-2.206 0-4-1.794-4-4V8c0-2.206 1.794-4 4-4h10zm.5 2a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>') center/contain no-repeat;
+}
+
+/* Optional: make the buttons pill-shaped + subtle glow on hover */
+.insta-btn{
+  border-radius: 999px;
+  padding: 8px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+.insta-btn:hover{
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+  transform: translateY(-2px);
+}
+
   </style>
 </head>
 <body>
@@ -341,20 +366,19 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
 
         <h4>Created by:</h4>
         <div class="creators">
-          <a href="https://www.instagram.com/tarek_houry?igsh=ZjczZDlzamlhank5" target="_blank" class="insta-btn">
-            <span>📸</span> Tarek Houry
-          </a>
-          <a href="https://www.instagram.com/michel.kachouh_?igsh=em43eDE1MGcwcnVo" target="_blank" class="insta-btn">
-            <span>📸</span> Michel Kahchouh
-          </a>
-        </div>
+  <a href="https://www.instagram.com/tarek_houry?igsh=ZjczZDlzamlhank5" target="_blank" rel="noopener" class="insta-btn">
+    <span class="ig-icon" aria-hidden="true"></span>
+    Tarek Houry
+  </a>
+  <a href="https://www.instagram.com/michel.kachouh_?igsh=em43eDE1MGcwcnVo" target="_blank" rel="noopener" class="insta-btn">
+    <span class="ig-icon" aria-hidden="true"></span>
+    Michel Kahchouh
+  </a>
+</div>
 
-        <h4>Contact & Feedback:</h4>
-        <p>
-          If you notice any issues or would like to share feedback, please email us at
-          <a href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a>.
-          We’re always happy to improve the experience. Thank you!
-        </p>
+
+        <h4>Contact:</h4>
+        <p><a href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a>.</p>
       </div>
     </div>
   </div>

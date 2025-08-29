@@ -174,13 +174,14 @@ function displayQuestion() {
     `).join('')}
   `;
 
- // Show/hide navigation buttons
 const isFirst = currentQuestionIndex === 0;
 const isLast  = currentQuestionIndex === selectedQuestions.length - 1;
 
 document.getElementById("prevQuestion").classList.toggle("hidden", isFirst);
 document.getElementById("nextQuestion").classList.toggle("hidden", isLast);
 document.getElementById("submitQuiz").classList.toggle("hidden", !isLast);
+
+console.log({idx: currentQuestionIndex, total: selectedQuestions.length, isFirst, isLast});
 
 }
 
@@ -337,5 +338,6 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
+
 
 

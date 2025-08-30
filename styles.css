@@ -883,7 +883,6 @@ input[type="radio"] {
   display: none !important;
 }
 
-/* Theme toggle button */
 .theme-btn {
   display: flex;
   align-items: center;
@@ -894,21 +893,27 @@ input[type="radio"] {
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
-  background: linear-gradient(135deg, #3b82f6, #2563eb); /* blue gradient */
-  color: white;
-  box-shadow: 0 6px 16px rgba(0,0,0,.25);
   transition: all 0.25s ease;
   position: fixed;
-  bottom: 20px;   /* change if you want it in header */
+  bottom: 20px;
   right: 20px;
   z-index: 999;
+  background: #111;  /* default = dark */
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
 }
+
 .theme-btn:hover {
   transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 24px rgba(0,0,0,.35);
-}
-.theme-btn .icon {
-  font-size: 1.2rem;
 }
 
-
+/* Light mode button look */
+body.light-mode .theme-btn {
+  background: #fff;
+  color: #111;
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+}
+.theme-btn .icon svg {
+  width: 18px;
+  height: 18px;
+}

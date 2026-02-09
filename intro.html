@@ -281,7 +281,19 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
   transition: opacity .18s ease;
 }
 .toast.show { opacity: 1; }
+.feedback-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
 
+.feedback-btn:hover {
+  background-color: #218838;
+}
   </style>
 </head>
 <body>
@@ -293,6 +305,13 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY -->
     <span id="brand">Lebanon Driving Quiz</span>
   </div>
 <div class="nav-right">
+  <a 
+    href="https://docs.google.com/forms/d/e/1FAIpQLSfTcp0fTIbcGS9S-_3_PLYpUd5B3bTMVUo8K5aNjZ2Tj58P9A/viewform?usp=publish-editor" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="feedback-btn">
+    📝 Send Feedback
+  </a>
   <button class="btn ghost" id="aboutBtn">About us</button>
   <button class="btn ghost" id="contactBtn">Contact us</button>
 </div>

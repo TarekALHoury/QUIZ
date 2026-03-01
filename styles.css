@@ -882,4 +882,68 @@ input[type="radio"] {
 #submitQuiz.hidden {
   display: none !important;
 }
+/* ===== Results UI makeover ===== */
+
+.result-question{
+  background:#fff;
+  border:1px solid #e6e8ef;
+  border-radius:12px;
+  padding:18px;
+  margin:18px auto;
+  max-width:760px;
+  box-shadow:0 8px 20px rgba(20,20,40,.06);
+}
+
+.q-title{
+  font-size:18px;
+  font-weight:800;
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+
+.q-num{ color:#1c5dff; font-weight:900; }
+
+.q-img{
+  max-width:100%;
+  border-radius:10px;
+  margin:10px 0 6px;
+}
+
+.options{ display:grid; gap:12px; margin-top:10px; }
+
+.option{
+  border:2px solid #e7e9f2;
+  border-radius:10px;
+  padding:14px 16px;
+  background:#fff;
+  position:relative;
+}
+
+.option.correct{
+  border-color:#22c55e;
+  background:#ecfdf5;
+}
+
+.option.wrong{
+  border-color:#ef4444;
+  background:#fef2f2;
+}
+
+.mark{
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-weight:900;
+}
+
+.mark.ok{ color:#16a34a; }
+.mark.no{ color:#dc2626; }
+
+.feedback{
+  margin-top:12px;
+  font-weight:800;
+  font-size:14px;
+}
 

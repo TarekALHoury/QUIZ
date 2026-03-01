@@ -72,28 +72,24 @@ async function loadQuestions(language) {
 
 // Fetch picture questions based on selected language
 async function loadPictureQuestions(language) {
-    try {
-        let pictureQuestionsFile = `pictureQuestions_${language}.json`; // Default to plural form
-        
-        // Handle Arabic language where the file uses singular form
-        if (language === 'ar') {
-            pictureQuestionsFile = `pictureQuestions_${language}.json`; // Use singular for Arabic
-        }
-        const response = await fetch(pictureQuestionsFile);
-        console.log(`Fetch response status for picture questions: ${response.status}`);
-        if (!response.ok) {
-            throw new Error(`Failed to load ${pictureQuestionsFile} - Status: ${response.status}`);
-        }
-        pictureQuestions = await response.json();
-        console.log("Picture questions loaded:", pictureQuestions);
-        
-        // Check if pictureQuestions is an array
-        if (!Array.isArray(pictureQuestions)) {
-            throw new Error("pictureQuestions is not an array");
-        }
-    } catch (error) {
-        console.error("Error loading picture questions:", error);
+  try {
+    const response = await fetch(`pictureQuestions_${language}.json`);
+    if (!response.ok) {
+      throw new Error(`Failed to load pictureQuestions_${language}.json`);
     }
+
+    pictureQuestions = await response.json();
+
+    if (!Array.isArray(pictureQuestions)) {
+      throw new Error("pictureQuestions is not an array");
+    }
+
+    console.log("Picture questions loaded:", pictureQuestions);
+
+  } catch (error) {
+    console.error("Error loading picture questions:", error);
+    pictureQuestions = []; // prevent crash
+  }
 }
 
 // Change language based on user selection
@@ -124,7 +120,10 @@ async function startQuiz() {
   const questionCount = parseInt(document.getElementById('questionCount').value);
   const pictureQuestionCount = parseInt(document.getElementById('pictureQuestionCount').value);
 
-  if (questionCount >= 1 && questionCount <= 100 && pictureQuestionCount >= 1 && pictureQuestionCount <= 100) {
+  if (
+  questionCount >= 1 && questionCount <= 100 &&
+  pictureQuestionCount >= 0 && pictureQuestionCount <= 100
+) {
     document.getElementById('startQuiz').classList.add('hidden');
     document.getElementById('timer').classList.remove('hidden');
     startTimer();
@@ -137,6 +136,13 @@ async function startQuiz() {
     const allQuestions = [...selectedQuestions, ...selectedPictureQuestions];
     selectedQuestions = allQuestions.sort(() => Math.random() - 0.5);
 
+      if (selectedQuestions.length === 0) {
+  alert("No questions loaded. Check your JSON files and counts.");
+  document.getElementById("startQuiz").classList.remove("hidden");
+  document.getElementById("timer").classList.add("hidden");
+  clearInterval(timerInterval);
+  return;
+}
     currentQuestionIndex = 0;
     document.getElementById("quizContainer").classList.remove("hidden");
     document.querySelector(".config").classList.add("hidden");

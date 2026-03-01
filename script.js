@@ -76,7 +76,7 @@ async function loadPictureQuestions(language) {
         let pictureQuestionsFile = `pictureQuestions_${language}.json`; // Default to plural form
         
         // Handle Arabic language where the file uses singular form
-        if (language === 'en') {
+        if (language === 'ar') {
             pictureQuestionsFile = `pictureQuestions_${language}.json`; // Use singular for Arabic
         }
         const response = await fetch(pictureQuestionsFile);
@@ -212,36 +212,42 @@ function submitQuiz() {
     const userAnswer = selectedAnswers[index] || "No Answer";
     const isCorrect = selectedAnswers[index] === question.answer;
 
-    const opts = Array.isArray(question.options) ? question.options : [];
+   const opts = (Array.isArray(question.options) ? question.options : [])
+  .filter(o => typeof o === "string" && o.trim().length > 0);
     const correctIndex = opts.indexOf(question.answer);
 
     return `
       <div class="result-question">
         <div class="q-title">
           <span class="q-num">${index + 1}.</span>
-          <span>${question.question}</span>
+          <span>${qText}</span>
         </div>
 
         ${question.image ? `<img class="q-img" src="${question.image}" alt="Question Image">` : ""}
 
-        <div class="options">
-          ${opts.map((opt) => {
-            const picked = selectedAnswers[index] === opt;
-            const correct = question.answer === opt;
+      ${opts.length ? `
+  <div class="options">
+    ${opts.map((opt) => {
+      const picked = selectedAnswers[index] === opt;
+      const correct = question.answer === opt;
 
-            const cls =
-              correct ? "option correct" :
-              picked && !correct ? "option wrong" :
-              "option";
+      const cls =
+        correct ? "option correct" :
+        picked && !correct ? "option wrong" :
+        "option";
 
-            const mark =
-              correct ? `<span class="mark ok">✓</span>` :
-              picked && !correct ? `<span class="mark no">✗</span>` :
-              "";
+      const mark =
+        correct ? `<span class="mark ok">✓</span>` :
+        picked && !correct ? `<span class="mark no">✗</span>` :
+        "";
 
-            return `<div class="${cls}">${opt}${mark}</div>`;
-          }).join("")}
-        </div>
+      return `<div class="${cls}">${opt}${mark}</div>`;
+    }).join("")}
+  </div>
+` : `
+  <p>Your Answer: <b>${selectedAnswers[index] || "No Answer"}</b></p>
+  <p>Correct Answer: <b>${question.answer || "Missing answer"}</b></p>
+`}
 
         <div class="feedback ${isCorrect ? "good" : "bad"}">
           ${isCorrect ? "Correct!" : (correctIndex >= 0 ? `Incorrect. The correct answer is option ${correctIndex + 1}.` : `Incorrect.`)}
@@ -266,7 +272,7 @@ function submitQuiz() {
 // Restart quiz function
 function restartQuiz() {
     // Reset necessary variables and UI elements
-    selectedAnswers = [];
+    selectedAnswers = {};
     currentQuestionIndex = 0;
     document.getElementById("result").classList.add("hidden");
     document.getElementById("quizContainer").classList.remove("hidden");
@@ -344,11 +350,7 @@ function startTimer() {
 }
 
 // Start quiz button event listener
-document.getElementById("startQuiz").addEventListener("click", function() {
-    startQuiz();
-    document.getElementById('startQuiz').classList.add('hidden');
-    document.getElementById('timer').classList.remove('hidden'); // Ensure the timer is visible
-});
+document.getElementById("startQuiz").addEventListener("click", startQuiz);;
 
 // Attach the submit button click event
 document.getElementById('submitQuiz').addEventListener('click', submitQuiz);
@@ -363,6 +365,7 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
+
 
 
 

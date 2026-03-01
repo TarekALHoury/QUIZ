@@ -947,3 +947,23 @@ input[type="radio"] {
   font-size:14px;
 }
 
+/* ===== DEBUG: force quiz visible ===== */
+#quizContainer {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#quiz {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#quiz li,
+#quiz label,
+#quiz span,
+#quiz h2,
+#quiz h3 {
+  color: #111 !important;
+}

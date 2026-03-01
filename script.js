@@ -197,69 +197,70 @@ document.getElementById("nextQuestion").addEventListener("click", () => {
 
 // Submit the quiz function
 function submitQuiz() {
-    clearInterval(timerInterval);
-    const resultContainer = document.getElementById("result");
-    let score = 0;
+  clearInterval(timerInterval);
 
-    // Ensure selected answers are correctly assigned before checking
-    selectedQuestions.forEach((question, index) => {
-        if (selectedAnswers[index] === question.answer) {
-            score++;
-        }
-    });
+  const resultContainer = document.getElementById("result");
+  let score = 0;
 
-    document.getElementById("quizContainer").classList.add("hidden");
-    const resultHTML = selectedQuestions.map((question, index) => {
-        const userAnswer = selectedAnswers[index] || "No Answer";
-        const isCorrect = selectedAnswers[index] === question.answer;
-        return `
-  <div class="result-question">
-    <div class="q-title">
-      <span class="q-num">${index + 1}.</span>
-      <span>${question.question}</span>
-    </div>
+  selectedQuestions.forEach((question, index) => {
+    if (selectedAnswers[index] === question.answer) score++;
+  });
 
-    ${question.image ? `<img class="q-img" src="${question.image}" alt="Question Image">` : ""}
+  document.getElementById("quizContainer").classList.add("hidden");
 
-    <div class="options">
-      ${question.options.map((opt) => {
-        const picked = selectedAnswers[index] === opt;
-        const correct = question.answer === opt;
+  const resultHTML = selectedQuestions.map((question, index) => {
+    const userAnswer = selectedAnswers[index] || "No Answer";
+    const isCorrect = selectedAnswers[index] === question.answer;
 
-        const cls =
-          correct ? "option correct" :
-          picked && !correct ? "option wrong" :
-          "option";
+    const opts = Array.isArray(question.options) ? question.options : [];
+    const correctIndex = opts.indexOf(question.answer);
 
-        const mark =
-          correct ? `<span class="mark ok">✓</span>` :
-          picked && !correct ? `<span class="mark no">✗</span>` :
-          "";
-
-        return `<div class="${cls}">${opt}${mark}</div>`;
-      }).join("")}
-    </div>
-
-    <div class="feedback ${isCorrect ? "good" : "bad"}">
-      ${isCorrect ? "Correct!" : `Incorrect. The correct answer is option ${question.options.indexOf(question.answer) + 1}.`}
-    </div>
-  </div>
-`;
-
-    resultContainer.innerHTML = `
-        <p style="font-size: 2em; text-align: center;"> ${score}/ ${selectedQuestions.length}</p>
-        <div class="result-content">
-            ${resultHTML}
+    return `
+      <div class="result-question">
+        <div class="q-title">
+          <span class="q-num">${index + 1}.</span>
+          <span>${question.question}</span>
         </div>
-        <button id="restartQuiz" class="btn">Restart Quiz</button>
+
+        ${question.image ? `<img class="q-img" src="${question.image}" alt="Question Image">` : ""}
+
+        <div class="options">
+          ${opts.map((opt) => {
+            const picked = selectedAnswers[index] === opt;
+            const correct = question.answer === opt;
+
+            const cls =
+              correct ? "option correct" :
+              picked && !correct ? "option wrong" :
+              "option";
+
+            const mark =
+              correct ? `<span class="mark ok">✓</span>` :
+              picked && !correct ? `<span class="mark no">✗</span>` :
+              "";
+
+            return `<div class="${cls}">${opt}${mark}</div>`;
+          }).join("")}
+        </div>
+
+        <div class="feedback ${isCorrect ? "good" : "bad"}">
+          ${isCorrect ? "Correct!" : (correctIndex >= 0 ? `Incorrect. The correct answer is option ${correctIndex + 1}.` : `Incorrect.`)}
+        </div>
+      </div>
     `;
+  }).join("");
 
-    resultContainer.classList.remove("hidden");
+  resultContainer.innerHTML = `
+    <p style="font-size: 2em; text-align: center;">${score} / ${selectedQuestions.length}</p>
+    <div class="result-content">${resultHTML}</div>
+    <button id="restartQuiz" class="btn">Restart Quiz</button>
+  `;
 
-    // Attach the restart button click event
-    document.getElementById("restartQuiz").addEventListener("click", () => {
-        window.location.href = './quiztab';
-    });
+  resultContainer.classList.remove("hidden");
+
+  document.getElementById("restartQuiz").addEventListener("click", () => {
+    window.location.href = './quiztab';
+  });
 }
 
 // Restart quiz function
@@ -362,6 +363,7 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
+
 
 
 

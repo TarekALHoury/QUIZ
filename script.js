@@ -72,24 +72,28 @@ async function loadQuestions(language) {
 
 // Fetch picture questions based on selected language
 async function loadPictureQuestions(language) {
-  try {
-    const response = await fetch(`pictureQuestions_${language}.json`);
-    if (!response.ok) {
-      throw new Error(`Failed to load pictureQuestions_${language}.json`);
+    try {
+        let pictureQuestionsFile = `pictureQuestions_${language}.json`; // Default to plural form
+        
+        // Handle Arabic language where the file uses singular form
+        if (language === 'en') {
+            pictureQuestionsFile = `pictureQuestions_${language}.json`; // Use singular for Arabic
+        }
+        const response = await fetch(pictureQuestionsFile);
+        console.log(`Fetch response status for picture questions: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Failed to load ${pictureQuestionsFile} - Status: ${response.status}`);
+        }
+        pictureQuestions = await response.json();
+        console.log("Picture questions loaded:", pictureQuestions);
+        
+        // Check if pictureQuestions is an array
+        if (!Array.isArray(pictureQuestions)) {
+            throw new Error("pictureQuestions is not an array");
+        }
+    } catch (error) {
+        console.error("Error loading picture questions:", error);
     }
-
-    pictureQuestions = await response.json();
-
-    if (!Array.isArray(pictureQuestions)) {
-      throw new Error("pictureQuestions is not an array");
-    }
-
-    console.log("Picture questions loaded:", pictureQuestions);
-
-  } catch (error) {
-    console.error("Error loading picture questions:", error);
-    pictureQuestions = []; // prevent crash
-  }
 }
 
 // Change language based on user selection
@@ -120,10 +124,7 @@ async function startQuiz() {
   const questionCount = parseInt(document.getElementById('questionCount').value);
   const pictureQuestionCount = parseInt(document.getElementById('pictureQuestionCount').value);
 
-  if (
-  questionCount >= 1 && questionCount <= 100 &&
-  pictureQuestionCount >= 0 && pictureQuestionCount <= 100
-) {
+  if (questionCount >= 1 && questionCount <= 100 && pictureQuestionCount >= 1 && pictureQuestionCount <= 100) {
     document.getElementById('startQuiz').classList.add('hidden');
     document.getElementById('timer').classList.remove('hidden');
     startTimer();
@@ -136,13 +137,6 @@ async function startQuiz() {
     const allQuestions = [...selectedQuestions, ...selectedPictureQuestions];
     selectedQuestions = allQuestions.sort(() => Math.random() - 0.5);
 
-      if (selectedQuestions.length === 0) {
-  alert("No questions loaded. Check your JSON files and counts.");
-  document.getElementById("startQuiz").classList.remove("hidden");
-  document.getElementById("timer").classList.add("hidden");
-  clearInterval(timerInterval);
-  return;
-}
     currentQuestionIndex = 0;
     document.getElementById("quizContainer").classList.remove("hidden");
     document.querySelector(".config").classList.add("hidden");
@@ -203,82 +197,51 @@ document.getElementById("nextQuestion").addEventListener("click", () => {
 
 // Submit the quiz function
 function submitQuiz() {
-  clearInterval(timerInterval);
+    clearInterval(timerInterval);
+    const resultContainer = document.getElementById("result");
+    let score = 0;
 
-  const resultContainer = document.getElementById("result");
-  let score = 0;
+    // Ensure selected answers are correctly assigned before checking
+    selectedQuestions.forEach((question, index) => {
+        if (selectedAnswers[index] === question.answer) {
+            score++;
+        }
+    });
 
-  selectedQuestions.forEach((question, index) => {
-    if (selectedAnswers[index] === question.answer) score++;
-  });
+    document.getElementById("quizContainer").classList.add("hidden");
+    const resultHTML = selectedQuestions.map((question, index) => {
+        const userAnswer = selectedAnswers[index] || "No Answer";
+        const isCorrect = selectedAnswers[index] === question.answer;
+        return `
+            <div class="result-question">
+                <p><strong>Question ${index + 1}:</strong> ${question.question}</p>
+                ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
+                <p>Your Answer: <span class="${isCorrect ? 'correct' : 'wrong'}">${selectedAnswers[index] || "No Answer"}</span></p>
+                <p>Correct Answer: <span class="correct">${question.answer}</span></p>
+            </div>
+        `;
+    }).join("");
 
-  document.getElementById("quizContainer").classList.add("hidden");
-
-  const resultHTML = selectedQuestions.map((question, index) => {
-    const userAnswer = selectedAnswers[index] || "No Answer";
-    const isCorrect = selectedAnswers[index] === question.answer;
-
-   const opts = (Array.isArray(question.options) ? question.options : [])
-  .filter(o => typeof o === "string" && o.trim().length > 0);
-    const correctIndex = opts.indexOf(question.answer);
-
-    return `
-      <div class="result-question">
-        <div class="q-title">
-          <span class="q-num">${index + 1}.</span>
-          <span>${qText}</span>
+    resultContainer.innerHTML = `
+        <p style="font-size: 2em; text-align: center;"> ${score}/ ${selectedQuestions.length}</p>
+        <div class="result-content">
+            ${resultHTML}
         </div>
-
-        ${question.image ? `<img class="q-img" src="${question.image}" alt="Question Image">` : ""}
-
-      ${opts.length ? `
-  <div class="options">
-    ${opts.map((opt) => {
-      const picked = selectedAnswers[index] === opt;
-      const correct = question.answer === opt;
-
-      const cls =
-        correct ? "option correct" :
-        picked && !correct ? "option wrong" :
-        "option";
-
-      const mark =
-        correct ? `<span class="mark ok">✓</span>` :
-        picked && !correct ? `<span class="mark no">✗</span>` :
-        "";
-
-      return `<div class="${cls}">${opt}${mark}</div>`;
-    }).join("")}
-  </div>
-` : `
-  <p>Your Answer: <b>${selectedAnswers[index] || "No Answer"}</b></p>
-  <p>Correct Answer: <b>${question.answer || "Missing answer"}</b></p>
-`}
-
-        <div class="feedback ${isCorrect ? "good" : "bad"}">
-          ${isCorrect ? "Correct!" : (correctIndex >= 0 ? `Incorrect. The correct answer is option ${correctIndex + 1}.` : `Incorrect.`)}
-        </div>
-      </div>
+        <button id="restartQuiz" class="btn">Restart Quiz</button>
     `;
-  }).join("");
 
-  resultContainer.innerHTML = `
-    <p style="font-size: 2em; text-align: center;">${score} / ${selectedQuestions.length}</p>
-    <div class="result-content">${resultHTML}</div>
-    <button id="restartQuiz" class="btn">Restart Quiz</button>
-  `;
+    resultContainer.classList.remove("hidden");
 
-  resultContainer.classList.remove("hidden");
-
-  document.getElementById("restartQuiz").addEventListener("click", () => {
-    window.location.href = './quiztab';
-  });
+    // Attach the restart button click event
+    document.getElementById("restartQuiz").addEventListener("click", () => {
+        window.location.href = './quiztab';
+    });
 }
 
 // Restart quiz function
 function restartQuiz() {
     // Reset necessary variables and UI elements
-    selectedAnswers = {};
+    selectedAnswers = [];
     currentQuestionIndex = 0;
     document.getElementById("result").classList.add("hidden");
     document.getElementById("quizContainer").classList.remove("hidden");
@@ -356,7 +319,11 @@ function startTimer() {
 }
 
 // Start quiz button event listener
-document.getElementById("startQuiz").addEventListener("click", startQuiz);;
+document.getElementById("startQuiz").addEventListener("click", function() {
+    startQuiz();
+    document.getElementById('startQuiz').classList.add('hidden');
+    document.getElementById('timer').classList.remove('hidden'); // Ensure the timer is visible
+});
 
 // Attach the submit button click event
 document.getElementById('submitQuiz').addEventListener('click', submitQuiz);
@@ -371,8 +338,3 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
-
-
-
-
-

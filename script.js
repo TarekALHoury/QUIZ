@@ -55,20 +55,31 @@ changeDirection();
 
 
 // Fetch normal questions based on selected language
-async function loadQuestions(language) {
+async function loadquestions(language) {
     try {
-        console.log(`Loading normal questions for language: ${language}`);
-        const response = await fetch(`questions_${language}.json`);
-        console.log(`Fetch response status for normal questions: ${response.status}`);
+        let questionsFile = `questions_${language}.json`; // Default to plural form
+        
+        // Handle Arabic language where the file uses singular form
+        if (language === 'en') {
+           questionsFile = `questions_${language}.json`; // Use singular for Arabic
+        }
+        const response = await fetch(questions);
+        console.log(`Fetch response status for questions: ${response.status}`);
         if (!response.ok) {
-            throw new Error(`Failed to load questions_${language}.json - Status: ${response.status}`);
+            throw new Error(`Failed to load ${questions} - Status: ${response.status}`);
         }
         questions = await response.json();
-        console.log("Normal questions loaded:", questions);
+        console.log("Picture questions loaded:", questions);
+        
+        // Check if pictureQuestions is an array
+        if (!Array.isArray(questions)) {
+            throw new Error("questions is not an array");
+        }
     } catch (error) {
-        console.error("Error loading normal questions:", error);
+        console.error("Error loading questions:", error);
     }
 }
+
 
 // Fetch picture questions based on selected language
 async function loadPictureQuestions(language) {
@@ -378,4 +389,5 @@ themeToggle.addEventListener("click", () => {
 // on load
 const savedTheme = localStorage.getItem("theme");
 setTheme(savedTheme === "light" ? "light" : "dark");
+
 

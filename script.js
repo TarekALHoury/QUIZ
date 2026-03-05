@@ -100,6 +100,10 @@ async function loadPictureQuestions(language) {
 document.getElementById('language').addEventListener('change', function () {
 
     selectedLanguage = this.value;
+    questions = [];
+selectedQuestions = [];
+selectedAnswers = {};
+currentQuestionIndex = 0;
     console.log(`Language changed to: ${selectedLanguage}`);
 
     // Reload questions and picture questions for the selected language
@@ -378,4 +382,5 @@ themeToggle.addEventListener("click", () => {
 // on load
 const savedTheme = localStorage.getItem("theme");
 setTheme(savedTheme === "light" ? "light" : "dark");
+
 

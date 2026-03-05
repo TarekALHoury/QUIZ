@@ -1049,27 +1049,27 @@ body.dark-mode .clickable-item:hover {
     }
 
     .container {
-        padding: 20px 16px;
-        margin: 0;
-        width: 100vw;
-        height: 100%;
-        min-height: 100vh;
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-        border-bottom: none;
-        border-top: none;
+        padding: 60px 16px 20px;
+        /* More top padding for the toggle */
+        margin: 0 !important;
+        width: 100vw !important;
+        height: 100% !important;
+        min-height: 100vh !important;
+        border-radius: 0 !important;
+        background-color: var(--bg-container);
         display: flex;
         flex-direction: column;
+        border: none !important;
+        box-shadow: none !important;
     }
 
     .config {
         padding: 20px 16px;
         margin: 0;
-        border-radius: 0;
-        border: none;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
         box-shadow: none;
-        flex-grow: 1;
+        flex-grow: 0;
     }
 
     #quizContainer {
@@ -1084,7 +1084,8 @@ body.dark-mode .clickable-item:hover {
     }
 
     #quizTitle {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        margin-top: 10px;
     }
 
     button {
@@ -1103,9 +1104,16 @@ body.dark-mode .clickable-item:hover {
         top: 15px;
         right: 15px;
         z-index: 1100;
-        /* Above taskbar if necessary */
-        padding: 10px 14px;
-        font-size: 13px;
+        width: 44px;
+        /* Standard touch target size */
+        height: 44px;
+        padding: 0 !important;
+        /* Reset padding for circular shape */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50% !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
     }
 
     .theme-toggle .label {

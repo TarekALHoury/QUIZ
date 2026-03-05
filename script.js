@@ -70,46 +70,30 @@ async function loadQuestions(language) {
     }
 }
 
-async function loadQuestions(language) {
-  const file = `questions_${language}.json`;
-  try {
-    console.log("Loading normal questions:", file);
-
-    const response = await fetch(file);
-    console.log("Normal questions fetched from:", response.url, "status:", response.status);
-
-    if (!response.ok) throw new Error(`${file} not found (${response.status})`);
-
-    const data = await response.json();
-    if (!Array.isArray(data)) throw new Error("questions is not an array");
-
-    questions = data;
-    console.log("First normal question:", questions[0]);
-  } catch (error) {
-    console.error("Error loading normal questions:", error);
-    questions = []; // IMPORTANT: don't keep old English questions
-  }
-}
-
+// Fetch picture questions based on selected language
 async function loadPictureQuestions(language) {
-  const file = `pictureQuestions_${language}.json`;
-  try {
-    console.log("Loading picture questions:", file);
-
-    const response = await fetch(file);
-    console.log("Picture questions fetched from:", response.url, "status:", response.status);
-
-    if (!response.ok) throw new Error(`${file} not found (${response.status})`);
-
-    const data = await response.json();
-    if (!Array.isArray(data)) throw new Error("pictureQuestions is not an array");
-
-    pictureQuestions = data;
-    console.log("First picture question:", pictureQuestions[0]);
-  } catch (error) {
-    console.error("Error loading picture questions:", error);
-    pictureQuestions = [];
-  }
+    try {
+        let pictureQuestionsFile = `pictureQuestions_${language}.json`; // Default to plural form
+        
+        // Handle Arabic language where the file uses singular form
+        if (language === 'en') {
+            pictureQuestionsFile = `pictureQuestions_${language}.json`; // Use singular for Arabic
+        }
+        const response = await fetch(pictureQuestionsFile);
+        console.log(`Fetch response status for picture questions: ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Failed to load ${pictureQuestionsFile} - Status: ${response.status}`);
+        }
+        pictureQuestions = await response.json();
+        console.log("Picture questions loaded:", pictureQuestions);
+        
+        // Check if pictureQuestions is an array
+        if (!Array.isArray(pictureQuestions)) {
+            throw new Error("pictureQuestions is not an array");
+        }
+    } catch (error) {
+        console.error("Error loading picture questions:", error);
+    }
 }
 
 // Change language based on user selection
@@ -394,6 +378,4 @@ themeToggle.addEventListener("click", () => {
 // on load
 const savedTheme = localStorage.getItem("theme");
 setTheme(savedTheme === "light" ? "light" : "dark");
-
-
 

@@ -2,48 +2,57 @@
 <!-- @copyrights
 ALL RIGHTS ARE RESERVED : TAREK HOURY-->
 <html lang="en">
+
 <head>
- <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <title>Quiz Tab — Lebanon Driving Quiz</title>
-  <meta name="description" content="Take a timed practice quiz for your Lebanese driving theory exam. Choose your question count, start the 15-minute timer, and test your knowledge in English, Arabic, or French." />
-  <meta name="keywords" content="Lebanon driving quiz, theory test practice, Lebanese exam questions, driving license quiz" />
-  <meta name="theme-color" content="#0f172a" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="Quiz Tab — Lebanon Driving Quiz" />
-  <meta property="og:description" content="Timed practice quiz for the Lebanese driving theory exam. Choose your question count, start the 15-minute timer, and test yourself." />
-  <meta property="og:image" content="lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO-2.png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lebanondrivingquiz.com/quiz.html" />
+        <title>Quiz Tab — Lebanon Driving Quiz</title>
+        <meta name="description"
+            content="Take a timed practice quiz for your Lebanese driving theory exam. Choose your question count, start the 15-minute timer, and test your knowledge in English, Arabic, or French." />
+        <meta name="keywords"
+            content="Lebanon driving quiz, theory test practice, Lebanese exam questions, driving license quiz" />
+        <meta name="theme-color" content="#0f172a" />
+
+        <!-- Open Graph / Social -->
+        <meta property="og:title" content="Quiz Tab — Lebanon Driving Quiz" />
+        <meta property="og:description"
+            content="Timed practice quiz for the Lebanese driving theory exam. Choose your question count, start the 15-minute timer, and test yourself." />
+        <meta property="og:image" content="lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO-2.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lebanondrivingquiz.com/quiz.html" />
 
 
-  <!-- Icons -->
- <link rel="icon" href="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO.png" type="image/png" />
-  <link rel="icon" href="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO-2.png" sizes="192x192" type="image/png" />
-  <link rel="icon" href="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO-2.png" sizes="512x512" type="image/png" />
+        <!-- Icons -->
+        <link rel="icon" href="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO.png" type="image/png" />
+        <link rel="icon" href="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO-2.png" sizes="192x192"
+            type="image/png" />
+        <link rel="icon" href="https://lebanondrivingquiz.com/Lebanon-Driving-Quiz-LOGO-2.png" sizes="512x512"
+            type="image/png" />
 
-  <!-- Styles & Fonts -->
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet" />
+        <!-- Styles & Fonts -->
+        <link rel="stylesheet" href="styles.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet" />
 
-  <style>
-    /* Disable scrolling only on small screens (mobile) */
-    @media (max-width: 768px) {
-      html, body {
-        height: 100%;
-        margin: 0;
-        overflow: hidden; /* disables scrolling */
-      }
-    }
-  </style>
-</head>
+    </head>
 
 
 <body>
     <div id="BG" class="container">
+
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="label">Dark Mode</span>
+            <span id="themeIcon">
+                <!-- SVG Moon icon by default -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+                </svg>
+            </span>
+        </button>
+
         <h1 id="quizTitle">Quiz</h1>
 
         <!-- Timer Section -->
@@ -52,10 +61,12 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY-->
         <!-- Quiz Configuration Section -->
         <div class="config">
             <label for="questionCount" id="questionCountLabel">Number of Questions:</label>
-            <input type="number" id="questionCount" min="1" max="100" placeholder="Enter a number 1-100" inputmode="numeric">
+            <input type="number" id="questionCount" min="1" max="100" placeholder="Enter a number 1-100"
+                inputmode="numeric">
 
             <label for="pictureQuestionCount" id="pictureQuestionCountLabel">Number of Signs:</label>
-            <input type="number" id="pictureQuestionCount" min="1" max="100" placeholder="Enter a number 1-100" inputmode="numeric">
+            <input type="number" id="pictureQuestionCount" min="1" max="100" placeholder="Enter a number 1-100"
+                inputmode="numeric">
 
             <label for="language" id="languageLabel">Select Language:</label>
             <label>اختر اللغة</label>
@@ -65,7 +76,10 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY-->
                 <option value="fr">French</option>
             </select>
             <div id="sorry">
-             <h4>قد تلاحظ بعض الأخطاء اللغوية أو الإملائية في الأسئلة، بعضها قد يكون ناتجًا عن خطأ غير مقصود أثناء نقل المحتوى، بينما البعض الآخر قد يكون مطابقًا للنص الأصلي في ملف الـPDF. إذا لا تمانع، نرجو منك مشاركتها معنا عبر البريد الإلكتروني لمساعدتنا في تصحيحها. <a href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a></h4>
+                <h4>قد تلاحظ بعض الأخطاء اللغوية أو الإملائية في الأسئلة، بعضها قد يكون ناتجًا عن خطأ غير مقصود أثناء
+                    نقل المحتوى، بينما البعض الآخر قد يكون مطابقًا للنص الأصلي في ملف الـPDF. إذا لا تمانع، نرجو منك
+                    مشاركتها معنا عبر البريد الإلكتروني لمساعدتنا في تصحيحها. <a
+                        href="mailto:lebanondrivingquiz@hotmail.com">lebanondrivingquiz@hotmail.com</a></h4>
             </div>
 
             <div class="button-container">
@@ -87,30 +101,12 @@ ALL RIGHTS ARE RESERVED : TAREK HOURY-->
         <div id="result" class="hidden"></div>
     </div>
 
-</script>
+    </script>
     <!-- Including the JavaScript files -->
     <script src="translations.js"></script>
     <script src="script.js"></script>
     <script src="timerTranslation.js"></script>
 
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

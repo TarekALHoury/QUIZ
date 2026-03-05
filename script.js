@@ -2,9 +2,9 @@
 let questions = [];
 let pictureQuestions = [];
 let currentQuestionIndex = 0;
-let selectedAnswers = {}; 
-let selectedQuestions = []; 
-let selectedPictureQuestions = []; 
+let selectedAnswers = {};
+let selectedQuestions = [];
+let selectedPictureQuestions = [];
 
 let timerInterval;
 let timeLeft = 900; // Set timer to 10 seconds for testing
@@ -21,6 +21,45 @@ document.querySelectorAll('button').forEach(button => {
 });
 
 // script.js
+
+// Element selectors for theme
+const themeToggleBtn = document.getElementById('themeToggle');
+const themeIconSpan = document.getElementById('themeIcon');
+
+// Check for saved theme
+const storedTheme = localStorage.getItem('quiz-theme');
+if (storedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeIconSpan.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+            <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    `;
+}
+
+// Theme toggle click handler
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('quiz-theme', 'dark');
+            themeIconSpan.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24">
+                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
+        } else {
+            localStorage.setItem('quiz-theme', 'light');
+            themeIconSpan.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                   <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+                </svg>
+            `;
+        }
+    });
+}
+
 
 // Get the language select element and message div
 const languageSelect = document.getElementById('language');
@@ -74,7 +113,7 @@ async function loadQuestions(language) {
 async function loadPictureQuestions(language) {
     try {
         let pictureQuestionsFile = `pictureQuestions_${language}.json`; // Default to plural form
-        
+
         // Handle Arabic language where the file uses singular form
         if (language === 'en') {
             pictureQuestionsFile = `pictureQuestions_${language}.json`; // Use singular for Arabic
@@ -86,7 +125,7 @@ async function loadPictureQuestions(language) {
         }
         pictureQuestions = await response.json();
         console.log("Picture questions loaded:", pictureQuestions);
-        
+
         // Check if pictureQuestions is an array
         if (!Array.isArray(pictureQuestions)) {
             throw new Error("pictureQuestions is not an array");
@@ -108,7 +147,7 @@ document.getElementById('language').addEventListener('change', function () {
 
     // Reset timer to ensure it's fresh after language change
     timeLeft = 900;
-    
+
     document.getElementById('time').textContent = "15:00";
     clearInterval(timerInterval);
     document.getElementById('timer').classList.add('hidden');
@@ -119,48 +158,48 @@ document.getElementById('language').addEventListener('change', function () {
 
 // --- startQuiz (fixed: sets initial button state) ---
 async function startQuiz() {
-  console.log("Start Quiz triggered...");
+    console.log("Start Quiz triggered...");
 
-  const questionCount = parseInt(document.getElementById('questionCount').value);
-  const pictureQuestionCount = parseInt(document.getElementById('pictureQuestionCount').value);
+    const questionCount = parseInt(document.getElementById('questionCount').value);
+    const pictureQuestionCount = parseInt(document.getElementById('pictureQuestionCount').value);
 
-  if (questionCount >= 1 && questionCount <= 100 && pictureQuestionCount >= 1 && pictureQuestionCount <= 100) {
-    document.getElementById('startQuiz').classList.add('hidden');
-    document.getElementById('timer').classList.remove('hidden');
-    startTimer();
+    if (questionCount >= 1 && questionCount <= 100 && pictureQuestionCount >= 1 && pictureQuestionCount <= 100) {
+        document.getElementById('startQuiz').classList.add('hidden');
+        document.getElementById('timer').classList.remove('hidden');
+        startTimer();
 
-    await Promise.all([loadQuestions(selectedLanguage), loadPictureQuestions(selectedLanguage)]);
+        await Promise.all([loadQuestions(selectedLanguage), loadPictureQuestions(selectedLanguage)]);
 
-    selectedQuestions = questions.sort(() => Math.random() - 0.5).slice(0, questionCount);
-    selectedPictureQuestions = pictureQuestions.sort(() => Math.random() - 0.5).slice(0, pictureQuestionCount);
+        selectedQuestions = questions.sort(() => Math.random() - 0.5).slice(0, questionCount);
+        selectedPictureQuestions = pictureQuestions.sort(() => Math.random() - 0.5).slice(0, pictureQuestionCount);
 
-    const allQuestions = [...selectedQuestions, ...selectedPictureQuestions];
-    selectedQuestions = allQuestions.sort(() => Math.random() - 0.5);
+        const allQuestions = [...selectedQuestions, ...selectedPictureQuestions];
+        selectedQuestions = allQuestions.sort(() => Math.random() - 0.5);
 
-    currentQuestionIndex = 0;
-    document.getElementById("quizContainer").classList.remove("hidden");
-    document.querySelector(".config").classList.add("hidden");
+        currentQuestionIndex = 0;
+        document.getElementById("quizContainer").classList.remove("hidden");
+        document.querySelector(".config").classList.add("hidden");
 
-    displayQuestion(); // show first question
+        displayQuestion(); // show first question
 
-    // set initial button states (first question)
-    document.getElementById("prevQuestion").classList.add("hidden");
-    document.getElementById("nextQuestion").classList.remove("hidden");
-    document.getElementById("submitQuiz").classList.add("hidden");
+        // set initial button states (first question)
+        document.getElementById("prevQuestion").classList.add("hidden");
+        document.getElementById("nextQuestion").classList.remove("hidden");
+        document.getElementById("submitQuiz").classList.add("hidden");
 
-    document.getElementById("returnButton").classList.remove("hidden");
-  } else {
-    alert("Please enter valid numbers for the questions and picture questions. Reload the page!");
-  }
+        document.getElementById("returnButton").classList.remove("hidden");
+    } else {
+        alert("Please enter valid numbers for the questions and picture questions. Reload the page!");
+    }
 }
 
 
 // --- displayQuestion (keep as-is, includes button toggles) ---
 function displayQuestion() {
-  const quizElement = document.getElementById("quiz");
-  const question = selectedQuestions[currentQuestionIndex];
+    const quizElement = document.getElementById("quiz");
+    const question = selectedQuestions[currentQuestionIndex];
 
-  quizElement.innerHTML = `
+    quizElement.innerHTML = `
     <h2 id="ok2"><u>Question ${currentQuestionIndex + 1}</u></h2>
     ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
     <h3>${question.question}</h3>
@@ -174,14 +213,14 @@ function displayQuestion() {
     `).join('')}
   `;
 
-const isFirst = currentQuestionIndex === 0;
-const isLast  = currentQuestionIndex === selectedQuestions.length - 1;
+    const isFirst = currentQuestionIndex === 0;
+    const isLast = currentQuestionIndex === selectedQuestions.length - 1;
 
-document.getElementById("prevQuestion").classList.toggle("hidden", isFirst);
-document.getElementById("nextQuestion").classList.toggle("hidden", isLast);
-document.getElementById("submitQuiz").classList.toggle("hidden", !isLast);
+    document.getElementById("prevQuestion").classList.toggle("hidden", isFirst);
+    document.getElementById("nextQuestion").classList.toggle("hidden", isLast);
+    document.getElementById("submitQuiz").classList.toggle("hidden", !isLast);
 
-console.log({idx: currentQuestionIndex, total: selectedQuestions.length, isFirst, isLast});
+    console.log({ idx: currentQuestionIndex, total: selectedQuestions.length, isFirst, isLast });
 
 }
 
@@ -319,7 +358,7 @@ function startTimer() {
 }
 
 // Start quiz button event listener
-document.getElementById("startQuiz").addEventListener("click", function() {
+document.getElementById("startQuiz").addEventListener("click", function () {
     startQuiz();
     document.getElementById('startQuiz').classList.add('hidden');
     document.getElementById('timer').classList.remove('hidden'); // Ensure the timer is visible
@@ -339,45 +378,7 @@ loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
 
-const themeToggle = document.getElementById("themeToggle");
-const label = themeToggle.querySelector(".label");
-const icon = document.getElementById("themeIcon");
 
-const sunSVG = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="5"/>
-    <path d="M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 6.95l-1.41-1.41M6.46 6.46L5.05 5.05m12.9 0l-1.41 1.41M6.46 17.54l-1.41 1.41"/>
-  </svg>
-`;
-
-const moonSVG = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
-  </svg>
-`;
-
-function setTheme(mode) {
-  if (mode === "light") {
-    document.body.classList.add("light-mode");
-    label.textContent = "Dark Mode";
-    icon.innerHTML = sunSVG;
-    localStorage.setItem("theme", "light");
-  } else {
-    document.body.classList.remove("light-mode");
-    label.textContent = "Light Mode";
-    icon.innerHTML = moonSVG;
-    localStorage.setItem("theme", "dark");
-  }
-}
-
-themeToggle.addEventListener("click", () => {
-  const isLight = document.body.classList.contains("light-mode");
-  setTheme(isLight ? "dark" : "light");
-});
-
-// on load
-const savedTheme = localStorage.getItem("theme");
-setTheme(savedTheme === "light" ? "light" : "dark");
 
 
 

@@ -59,14 +59,17 @@ async function loadQuestions(language) {
     try {
         console.log(`Loading normal questions for language: ${language}`);
         const response = await fetch(`questions_${language}.json`);
-        console.log(`Fetch response status for normal questions: ${response.status}`);
+        console.log("Normal questions fetched from:", response.url, "status:", response.status);
         if (!response.ok) {
             throw new Error(`Failed to load questions_${language}.json - Status: ${response.status}`);
         }
         questions = await response.json();
         console.log("Normal questions loaded:", questions);
     } catch (error) {
+        } catch (error) {
         console.error("Error loading normal questions:", error);
+        questions = []; // IMPORTANT: prevents keeping English questions
+}
     }
 }
 
@@ -100,6 +103,10 @@ async function loadPictureQuestions(language) {
 document.getElementById('language').addEventListener('change', function () {
 
     selectedLanguage = this.value;
+    questions = [];
+    selectedQuestions = [];
+    selectedAnswers = {};
+    currentQuestionIndex = 0;
     console.log(`Language changed to: ${selectedLanguage}`);
 
     // Reload questions and picture questions for the selected language
@@ -378,4 +385,5 @@ themeToggle.addEventListener("click", () => {
 // on load
 const savedTheme = localStorage.getItem("theme");
 setTheme(savedTheme === "light" ? "light" : "dark");
+
 

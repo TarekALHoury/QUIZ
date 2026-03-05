@@ -1,4 +1,3 @@
-// Global variables initialization
 let questions = [];
 let pictureQuestions = [];
 let currentQuestionIndex = 0;

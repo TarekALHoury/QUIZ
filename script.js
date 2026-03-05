@@ -1,3 +1,4 @@
+// Global variables initialization
 let questions = [];
 let pictureQuestions = [];
 let currentQuestionIndex = 0;
@@ -212,14 +213,38 @@ function submitQuiz() {
         const userAnswer = selectedAnswers[index] || "No Answer";
         const isCorrect = selectedAnswers[index] === question.answer;
         return `
-            <div class="result-question">
-                <p><strong>Question ${index + 1}:</strong> ${question.question}</p>
-                ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
-                <p>Your Answer: <span class="${isCorrect ? 'correct' : 'wrong'}">${selectedAnswers[index] || "No Answer"}</span></p>
-                <p>Correct Answer: <span class="correct">${question.answer}</span></p>
-            </div>
-        `;
-    }).join("");
+  <div class="result-question">
+    <div class="q-title">
+      <span class="q-num">${index + 1}.</span>
+      <span>${question.question}</span>
+    </div>
+
+    ${question.image ? `<img class="q-img" src="${question.image}" alt="Question Image">` : ""}
+
+    <div class="options">
+      ${question.options.map((opt) => {
+        const picked = selectedAnswers[index] === opt;
+        const correct = question.answer === opt;
+
+        const cls =
+          correct ? "option correct" :
+          picked && !correct ? "option wrong" :
+          "option";
+
+        const mark =
+          correct ? `<span class="mark ok">✓</span>` :
+          picked && !correct ? `<span class="mark no">✗</span>` :
+          "";
+
+        return `<div class="${cls}">${opt}${mark}</div>`;
+      }).join("")}
+    </div>
+
+    <div class="feedback ${isCorrect ? "good" : "bad"}">
+      ${isCorrect ? "Correct!" : `Incorrect. The correct answer is option ${question.options.indexOf(question.answer) + 1}.`}
+    </div>
+  </div>
+`;
 
     resultContainer.innerHTML = `
         <p style="font-size: 2em; text-align: center;"> ${score}/ ${selectedQuestions.length}</p>

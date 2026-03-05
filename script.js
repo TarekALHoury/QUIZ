@@ -75,7 +75,7 @@ async function loadPictureQuestions(language) {
         let pictureQuestionsFile = `pictureQuestions_${language}.json`; // Default to plural form
         
         // Handle Arabic language where the file uses singular form
-        if (language === 'en') {
+        if (language === 'ar') {
             pictureQuestionsFile = `pictureQuestions_${language}.json`; // Use singular for Arabic
         }
         const response = await fetch(pictureQuestionsFile);
@@ -337,3 +337,4 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
+

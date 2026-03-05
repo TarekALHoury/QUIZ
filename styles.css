@@ -1100,8 +1100,16 @@ body.dark-mode .clickable-item:hover {
     }
 
     .theme-toggle {
-        top: 10px;
-        right: 10px;
+        top: 15px;
+        right: 15px;
+        z-index: 1100;
+        /* Above taskbar if necessary */
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .theme-toggle .label {
+        display: none;
     }
 }
 

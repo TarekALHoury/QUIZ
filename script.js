@@ -213,38 +213,14 @@ function submitQuiz() {
         const userAnswer = selectedAnswers[index] || "No Answer";
         const isCorrect = selectedAnswers[index] === question.answer;
         return `
-  <div class="result-question">
-    <div class="q-title">
-      <span class="q-num">${index + 1}.</span>
-      <span>${question.question}</span>
-    </div>
-
-    ${question.image ? `<img class="q-img" src="${question.image}" alt="Question Image">` : ""}
-
-    <div class="options">
-      ${question.options.map((opt) => {
-        const picked = selectedAnswers[index] === opt;
-        const correct = question.answer === opt;
-
-        const cls =
-          correct ? "option correct" :
-          picked && !correct ? "option wrong" :
-          "option";
-
-        const mark =
-          correct ? `<span class="mark ok">✓</span>` :
-          picked && !correct ? `<span class="mark no">✗</span>` :
-          "";
-
-        return `<div class="${cls}">${opt}${mark}</div>`;
-      }).join("")}
-    </div>
-
-    <div class="feedback ${isCorrect ? "good" : "bad"}">
-      ${isCorrect ? "Correct!" : `Incorrect. The correct answer is option ${question.options.indexOf(question.answer) + 1}.`}
-    </div>
-  </div>
-`;
+            <div class="result-question">
+                <p><strong>Question ${index + 1}:</strong> ${question.question}</p>
+                ${question.image ? `<img src="${question.image}" alt="Question Image">` : ""}
+                <p>Your Answer: <span class="${isCorrect ? 'correct' : 'wrong'}">${selectedAnswers[index] || "No Answer"}</span></p>
+                <p>Correct Answer: <span class="correct">${question.answer}</span></p>
+            </div>
+        `;
+    }).join("");
 
     resultContainer.innerHTML = `
         <p style="font-size: 2em; text-align: center;"> ${score}/ ${selectedQuestions.length}</p>
@@ -362,5 +338,45 @@ loadQuestions('en');
 loadPictureQuestions('en');
 
 // Note: The duplicate event listener for "nextQuestion" has been removed.
+
+const themeToggle = document.getElementById("themeToggle");
+const label = themeToggle.querySelector(".label");
+const icon = document.getElementById("themeIcon");
+
+const sunSVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5"/>
+    <path d="M12 1v2m0 18v2m11-11h-2M3 12H1m16.95 6.95l-1.41-1.41M6.46 6.46L5.05 5.05m12.9 0l-1.41 1.41M6.46 17.54l-1.41 1.41"/>
+  </svg>
+`;
+
+const moonSVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/>
+  </svg>
+`;
+
+function setTheme(mode) {
+  if (mode === "light") {
+    document.body.classList.add("light-mode");
+    label.textContent = "Dark Mode";
+    icon.innerHTML = sunSVG;
+    localStorage.setItem("theme", "light");
+  } else {
+    document.body.classList.remove("light-mode");
+    label.textContent = "Light Mode";
+    icon.innerHTML = moonSVG;
+    localStorage.setItem("theme", "dark");
+  }
+}
+
+themeToggle.addEventListener("click", () => {
+  const isLight = document.body.classList.contains("light-mode");
+  setTheme(isLight ? "dark" : "light");
+});
+
+// on load
+const savedTheme = localStorage.getItem("theme");
+setTheme(savedTheme === "light" ? "light" : "dark");
 
 

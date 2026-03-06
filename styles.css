@@ -716,6 +716,8 @@ body.dark-mode .clickable-item:hover {
         border: 1px solid var(--border-color) !important;
         box-shadow: none !important;
         flex-grow: 0 !important;
+        max-height: none !important;
+        overflow-y: visible !important;
     }
 
     #quizContainer {

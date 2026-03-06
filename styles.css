@@ -780,23 +780,40 @@ body.dark-mode .clickable-item:hover {
     font-weight: 700;
 }
 
-/* Nice colors */
+/* Nice colors and order for desktop */
 #submitQuiz {
     background: #2563eb;
     color: #fff;
     border: 0;
+    order: 2;
 }
 
 #nextQuestion {
     background: #22c55e;
     color: #fff;
     border: 0;
+    order: 3;
 }
 
 #prevQuestion {
     background: #6b7280;
     color: #fff;
     border: 0;
+    order: 1;
+}
+
+@media (max-width: 768px) {
+    #submitQuiz {
+        order: 2;
+    }
+
+    #nextQuestion {
+        order: 1;
+    }
+
+    #prevQuestion {
+        order: 3;
+    }
 }
 
 #submitQuiz:hover {
